@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Behix Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #4b0082, #000000);
+      color: #fff;
+      font-family: 'Press Start 2P', monospace;
+      overflow: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #ffea00;
+      text-shadow: 0 0 10px #ffea00;
+    }
+
+    p {
+      font-size: 12px;
+      color: #aaa;
+      max-width: 600px;
+      margin: 10px auto 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      background: linear-gradient(145deg, #8e2de2, #4a00e0);
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 10px;
+      box-shadow: 0 0 10px #4a00e0;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <header>
+    <h1>Behix Works</h1>
+    <p>Crafting visuals that speak louder than words — from edits that spark emotion to stories that leave a mark.</p>
+    <a href="https://instagram.com/behix.edits" class="btn">Instagram</a>
+    <a href="https://instagram.com/tubekey_" class="btn">Backup Insta</a>
+    <a href="https://wa.me/905516704818" class="btn">WhatsApp</a>
+    <a href="mailto:banikamalibehbod@gmail.com" class="btn">Email</a>
+  </header>
+
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let crystals = [];
+    for (let i = 0; i < 100; i++) {
+      crystals.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 0.5 + 0.2,
+        alpha: Math.random()
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let c of crystals) {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${c.alpha})`;
+        ctx.fill();
+        c.y -= c.speed;
+        if (c.y < 0) c.y = canvas.height;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
